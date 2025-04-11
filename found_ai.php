@@ -130,8 +130,10 @@ document.addEventListener('click', async (event) => {
                     img2: matchImage
                 });
                 
-                // Redirect to preview page
                 window.location.href = `ai_match_preview.php?${params.toString()}`;
+            }
+            else {
+                alert('No matching items found in the database');
             }
 
         } catch (error) {
