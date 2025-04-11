@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lost & Found Image Matching</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-6 text-center">Lost &amp; Found Image Matching</h1>
+
+    <!-- Input for Lost Image URL -->
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700" for="lostImage">
+        Lost Image URL
+      </label>
+      <input id="lostImage" type="text" placeholder="Enter Lost Image URL" class="mt-1 block w-full border border-gray-300 rounded px-3 py-2" />
+    </div>
+
+    <!-- Input for Found Image URL -->
+    <div class="mb-6">
+      <label class="block text-sm font-medium text-gray-700" for="foundImage">
+        Found Image URL
+      </label>
+      <input id="foundImage" type="text" placeholder="Enter Found Image URL" class="mt-1 block w-full border border-gray-300 rounded px-3 py-2" />
+    </div>
+
+    <button id="matchBtn" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+      Check Match
+    </button>
+  </div>
+
+  <script>
+    // Clarifai settings
+    const CLARIFAI_API_KEY = '86c6bc453c0049e694ddee0637e98e05'; // Replace with your actual API key
+    const MODEL_ID = 'Qwen2_5-VL-7B-Instruct';
+    const MODEL_VERSION_ID = 'd937b8b81dff4b1280c91174d1762345';
+
+    // Helper function to call the proxy endpoint that forwards requests to Clarifai
+    async function getImageEmbedding(imageUrl) {
+      const payload = {
+        user_app_id: {
+          user_id: 'qwen',
+          app_id: 'qwen-VL'
+        },
+        inputs: [
+          {
+            data: {
+              image: {
+                url: imageUrl
+              }
+            }
+          }
+        ]
+      };
+
+      const response = await fetch('http://localhost:5500/clarifai-proxy', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Key ' + CLARIFAI_API_KEY
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+
+      if (data.outputs && data.outputs[0].data && data.outputs[0].data.embeddings) {
+        return data.outputs[0].data.embeddings[0].vector;
+      } else {
+        throw new Error('Embedding not found in Clarifai response');
+      }
+    }
+
+    // Function to compute cosine similarity between two vectors
+    function cosineSimilarity(vecA, vecB) {
+      if (vecA.length !== vecB.length) {
+        throw new Error('Vector lengths do not match');
+      }
+      let dot = 0, normA = 0, normB = 0;
+      for (let i = 0; i < vecA.length; i++) {
+        dot += vecA[i] * vecB[i];
+        normA += vecA[i] * vecA[i];
+        normB += vecB[i] * vecB[i];
+      }
+      return dot / (Math.sqrt(normA) * Math.sqrt(normB));
+    }
+
+    // Main function to fetch embeddings for lost and found images and then compare them
+    async function matchImages() {
+      const lostImageUrl = document.getElementById('lostImage').value;
+      const foundImageUrl = document.getElementById('foundImage').value;
+
+      try {
+        const lostEmbedding = await getImageEmbedding(lostImageUrl);
+        const foundEmbedding = await getImageEmbedding(foundImageUrl);
+        const similarity = cosineSimilarity(lostEmbedding, foundEmbedding);
+
+        const threshold = 0.8;
+        if (similarity >= threshold) {
+          alert('Images match! Similarity score: ' + similarity.toFixed(2));
+        } else {
+          alert('Images do not match. Similarity score: ' + similarity.toFixed(2));
+        }
+      } catch (error) {
+        console.error('Error matching images:', error);
+        alert('Error matching images: ' + error.message);
+      }
+    }
+
+    document.getElementById('matchBtn').addEventListener('click', matchImages);
+  </script>
+</body>
+</html>

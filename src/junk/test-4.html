@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Comparison with Clarifai</title>
+</head>
+<body>
+    <h1>Image Comparison with Clarifai API</h1>
+    <form id="imageForm">
+        <label for="image1">Lost Image URL:</label>
+        <input type="text" id="image1" placeholder="Enter URL of Lost Image"><br><br>
+
+        <label for="image2">Found Image URL:</label>
+        <input type="text" id="image2" placeholder="Enter URL of Found Image"><br><br>
+
+        <button type="button" onclick="compareImages()">Compare Images</button>
+    </form>
+    <p id="result"></p>
+
+    <script>
+        async function compareImages() {
+            const image1 = document.getElementById('image1').value;
+            const image2 = document.getElementById('image2').value;
+            const result = document.getElementById('result');
+
+            if (!image1 || !image2) {
+                result.textContent = "Please provide URLs for both images.";
+                return;
+            }
+
+            const apiUrl = "https://api.clarifai.com/v2/users/qwen/apps/qwen-VL/models/Qwen2_5-VL-7B-Instruct/versions/d937b8b81dff4b1280c91174d1762345/outputs";
+            const apiKey = "86c6bc453c0049e694ddee0637e98e05"; // Replace this with your actual API key
+
+            try {
+                const response1 = await fetch(apiUrl, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Key ${apiKey}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        inputs: [{ data: { image: { url: image1 } } }]
+                    })
+                });
+
+                const response2 = await fetch(apiUrl, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Key ${apiKey}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        inputs: [{ data: { image: { url: image2 } } }]
+                    })
+                });
+
+                const data1 = await response1.json();
+                const data2 = await response2.json();
+
+                // Simulating similarity comparison between both responses (adjust as per Clarifai's data structure)
+                if (data1.outputs && data2.outputs && image1 === image2) { // Placeholder logic
+                    result.textContent = "Same Images: Similarity > 90%";
+                } else {
+                    result.textContent = "Not Same Images: Similarity < 90%";
+                }
+            } catch (error) {
+                console.error("Error comparing images:", error);
+                result.textContent = "An error occurred. Please try again.";
+            }
+        }
+    </script>
+</body>
+</html>
