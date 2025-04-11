@@ -24,6 +24,7 @@ $matches = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $matches[] = [
         'image_path' => 'http://localhost/debugNinjas/src/img/upload/' . $row['image_path'],
+        'username' => $row['user_name'],
         'item_name' => $row['item_name'],
         'location' => $row['location'],
         'date' => $row['created_at']

@@ -7,6 +7,7 @@ include 'src/alert/alert_danger.php';
 
 $image1 = $_GET['img1'] ?? '';
 $image2 = $_GET['img2'] ?? '';
+$receiver = $_GET['receiver'] ?? '';
 
 ?>
 <!DOCTYPE html>
@@ -63,7 +64,11 @@ $image2 = $_GET['img2'] ?? '';
                 
                 Compare Items
             </button>
-            <div id="result" class="text-white py-3 "></div>
+            <div id="result" class="text-white py-3 mb-8"></div>
+            <div id="owner-btn" class="mt-6 hidden">
+                <a href="message.php?rec=<?php echo $receiver?>" class="text-base font-semibold text-white bg-yellow-600 px-6 py-2 rounded-md">Contact Owner</a>
+            </div>
+            
         </div>
     </section>
     <!-- celebrate -->
@@ -151,6 +156,7 @@ async function compareImages() {
         // Display result
         const result = data.candidates[0].content.parts[0].text;
         resultDiv.innerHTML = `<div class="result bg-green-500 text-white text-lg font-bold tracking-widest inline px-10 py-3 rounded-md">${result.replace(/(\d+%)/, '<strong>$1</strong>')}</div>`;
+        document.getElementById('owner-btn').classList.remove('hidden');
 
     } catch (error) {
         resultDiv.innerHTML = `<div class="error text-black bg-red-700 text-base font-bold tracking-wider">❌ Error: ${error.message}</div>`;

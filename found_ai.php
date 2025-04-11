@@ -127,7 +127,8 @@ document.addEventListener('click', async (event) => {
                 // Construct URL with both images
                 const params = new URLSearchParams({
                     img1: imagePath,
-                    img2: matchImage
+                    img2: matchImage,
+                    receiver: matches[0].username, 
                 });
                 
                 window.location.href = `ai_match_preview.php?${params.toString()}`;
