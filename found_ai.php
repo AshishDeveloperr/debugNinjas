@@ -91,7 +91,6 @@ include 'src/alert/alert_danger.php';
         </div>
    </section>
    <script>
-// Use event delegation for dynamic elements
 document.addEventListener('click', async (event) => {
     if (event.target.closest('.card button')) {
         console.log('Button clicked!');
@@ -103,9 +102,6 @@ document.addEventListener('click', async (event) => {
         const itemName = card.querySelector('h2').innerText;
         const itemType = card.dataset.itemType; 
         const imagePath = card.querySelector('img').src.split('/upload/')[1];
-
-        console.log('Item Type:', itemType);
-        console.log('Image Path:', imagePath);
 
         try {
             const response = await fetch('src/api/ai_match.php', {
@@ -124,11 +120,26 @@ document.addEventListener('click', async (event) => {
             const matches = await response.json();
             console.log('Potential Matches:', matches);
 
+            if (matches.length > 0) {
+                // Get first match's image
+                const matchImage = matches[0].image_path;
+                
+                // Construct URL with both images
+                const params = new URLSearchParams({
+                    img1: imagePath,
+                    img2: matchImage
+                });
+                
+                // Redirect to preview page
+                window.location.href = `ai_match_preview.php?${params.toString()}`;
+            }
+
         } catch (error) {
             console.error('Fetch Error:', error);
         }
     }
 });
+
 </script>
 </body>
 </html>

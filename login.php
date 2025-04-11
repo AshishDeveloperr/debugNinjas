@@ -23,12 +23,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $user = $result->fetch_assoc();
       
       if (password_verify($_POST['password'], $user['password'])) {
-          $successAlert = str_replace('id="success_msg"></div>', 'id="success_msg">Login successfully!</div>', $successAlert);
-          echo $successAlert;
           session_start();
           $_SESSION['user_id'] = $user['sno'];
           $_SESSION['username'] = $user['username'];
           $_SESSION['email'] = $user['email'];
+          $successAlert = str_replace('id="success_msg"></div>', 'id="success_msg">Login successfully!</div>', $successAlert);
+          echo $successAlert;
           
           // header("Location: dashboard.php");
           // exit();

@@ -21,6 +21,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       // Redirect to success page
       $successAlert = str_replace('id="success_msg"></div>', 'id="success_msg">Signup successfully!</div>', $successAlert);
       echo $successAlert;
+      session_start();
+      $_SESSION['user_id'] = $user['sno'];
+      $_SESSION['username'] = $user['username'];
+      $_SESSION['email'] = $user['email'];
   } else {
       $errorAlert = str_replace('id="error_msg"></div>', 'id="error_msg">Something went wrong.</div>', $errorAlert);
       echo $errorAlert;
