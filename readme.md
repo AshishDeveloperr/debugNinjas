@@ -1,1 +1,1 @@
-Kalpathon - Debug Ninjas
+Debug Ninjas
