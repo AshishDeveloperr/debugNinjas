@@ -1,0 +1,77 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+.class1{
+    display: flex;
+    position: relative;
+    display: block;
+    margin-bottom: 34px;
+}
+.class1 .class2{
+    position: relative;
+            display: flex;
+            font-size: 20px;
+            line-height: 40px;
+            font-family: 'Amatic SC', cursive;
+            font-weight: 100;
+            margin-bottom: 6px;
+            align-items: center;
+            justify-content: center;
+            color: rgb(129, 248, 129);
+
+}
+.class1 h2{
+    position: relative;
+            display: flex;
+            font-size: 35px;
+            line-height: 66px;
+            font-weight: 1000;
+            align-items: center;
+            justify-content: center;
+            color: rgb(34, 7, 7);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100vh;
+    gap: 15px;
+    padding: 15px;
+    
+    
+}
+
+.left-column, .right-column {
+    width: 25%;
+    
+}
+
+.middle-column {
+    width: 50%;
+    text-align: center;
+}
+
+img {
+    width: 100%; /* Ensures images are responsive and take up the full width of their container */
+    height: auto;
+    margin-bottom: 10px; /* Optional: space between images */
+}
+
+.left-column img {
+    width: 100%; /* Ensures images in left column take up full width of 25% */
+}
+
+.right-column img {
+    width: 100%; /* Ensures images in right column take up full width of 25% */
+}
+
+.middle-column img {
+    width: 100%; /* Ensures the middle image takes up the full width of 50% */
+}
+img:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
