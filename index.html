@@ -4,14 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="src/css/output.css">
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hubot+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     <title>Home Page</title>
+    <style>
+        * {
+            font-family: 'Hubot Sans', sans-serif;
+            /* font-family: 'Hubot Sans', 'Arial', sans-serif; */
+        }
+    </style>
 </head>
 
-<body>
-    <section class="bg-black p-3">
+<body class="bg-black">
+    <section class="p-3">
         <div class="bg-[#3E25F6] rounded-b-[5rem]">
-            <div class="container mx-auto ">
-
+            <div class="container mx-auto py-40 px-4 lg:px-10">
+                <div class="grid grid-cols-2 gap-5">
+                    <div class="col-span-1 text-white">
+                        <h1 class="text-9xl font-bold ">Lost</h1>
+                        <h1 class="text-9xl font-bold"><span class="text-[#EFFF00]">&</span> Find</h1>
+                        <p class="text-3xl font-semibold py-5">Your Search Ends Here!</p>
+                    </div>
+                    <div class="col-span-1 flex justify-center items-center">
+                        <img src="https://placehold.co/600x400" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-4 gap-4 py-12">
+            <div class="col-span-1 border border-[#FDC540] rounded-full text-black py-10 bg-[#FDC540] flex justify-center items-center space-x-2">
+                <p class="text-center text-2xl font-bold">IOS app Design</p>
+                <svg class="w-9 rotate-45 -mt-2" data-name="1-Arrow Up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                    <path d="m26.71 10.29-10-10a1 1 0 0 0-1.41 0l-10 10 1.41 1.41L15 3.41V32h2V3.41l8.29 8.29z"/>
+                </svg>
+            </div>
+            <div class="col-span-1 border border-[#FF664C] rounded-full text-black py-10 bg-[#FF664C]">
+                <p class="text-center text-2xl font-semibold">IOS app Design</p>
+            </div>
+            <div class="col-span-1 border border-[#84DB8C] rounded-full text-black py-10 bg-[#84DB8C]">
+                <p class="text-center text-2xl font-semibold">IOS app Design</p>
+            </div>
+            <div class="col-span-1 border border-white rounded-full text-black py-10 bg-white">
+                <p class="text-center text-2xl font-semibold">IOS app Design</p>
+            </div>
+        </div>
+    </section>
+    <section class="p-5">
+        <div class="border border-gray-400 rounded-full">
+            <div class="container mx-auto py-12">
+                <div class="flex justify-center">
+                    <div class="max-w-2xl text-center">
+                        <h2 class="text-4xl font-bold text-white">Typeface</h2>
+                        <p class="text-lg font-medium text-gray-300 py-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. At in doloribus aliquid consequatur laborum quibusdam odit commodi ea autem sit?</p>
+                        <div class="flex justify-center space-x-4 py-5">
+                            <a href="#" class="text-white bg-[#181818] px-8 py-2 rounded-full">FIND</a>
+                            <a href="#" class="text-white bg-[#181818] px-8 py-2 rounded-full">LOST</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
