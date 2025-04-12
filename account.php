@@ -1,3 +1,5 @@
+<?php?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,13 +22,13 @@
             </div>
             <div class="grid grid-cols-3 gap-5">
                 <div class="col-span-1 bg-[#FDC540] py-20 text-center rounded-2xl hover:scale-105 transition-all duration-300">
-                    <a href="#" class="text-black font-bold text-5xl">Find</a>
+                    <a href="find.php" class="text-black font-bold text-5xl">Find</a>
                 </div>
                 <div class="col-span-1 bg-[#FF664C] py-20 text-center rounded-2xl hover:scale-105 transition-all duration-300">
-                    <a href="#" class="text-black font-bold text-5xl">Lost</a>
+                    <a href="lost.php" class="text-black font-bold text-5xl">Lost</a>
                 </div>
                 <div class="col-span-1 bg-[#84DB8C] py-20 text-center rounded-2xl hover:scale-105 transition-all duration-300">
-                    <a href="#" class="text-black font-bold text-5xl">View Message</a>
+                    <a href="view_message.php" class="text-black font-bold text-5xl">View Message</a>
                 </div>
             </div>
         </div>

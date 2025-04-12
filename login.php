@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $successAlert = str_replace('id="success_msg"></div>', 'id="success_msg">Login successfully!</div>', $successAlert);
           echo $successAlert;
           
-          // header("Location: dashboard.php");
+          header("Location: account.html");
           // exit();
       } else {
           $errorAlert = str_replace('id="error_msg"></div>', 'id="error_msg">Wrong password.</div>', $errorAlert);
