@@ -25,6 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $_SESSION['user_id'] = $user['sno'];
       $_SESSION['username'] = $user['username'];
       $_SESSION['email'] = $user['email'];
+      
+      header("Location: account.php");
   } else {
       $errorAlert = str_replace('id="error_msg"></div>', 'id="error_msg">Something went wrong.</div>', $errorAlert);
       echo $errorAlert;
@@ -52,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="visible col-span-7 sm:col-span-4 md:col-span-4 lg:col-span-4 xl:col-span-4  grid h-950px px-6 lg:px-[67px] py-[31px]">
             <div class="grid grid-cols-1">
               <div class="col-span-1 logo ">
-                <img src="https://placehold.co/400x200" alt="" class="w-20">
+
               </div>
             </div>
             <form class="form-login lg:flex justify-center" method="POST">
@@ -82,8 +84,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
           <div class="hidden sm:col-span-3 md:col-span-3 lg:col-span-3 h-950px xl:col-span-3  sm:block md:block  xl:block 2xl:block">
             <!-- Right column content -->
-            <div class="flex items-center justify-center h-screen bg-[#F9F9F9] ">
-              <img src="https://placehold.co/1000x1200" alt="login" style="margin-bottom: 3em;">
+            <div class="flex items-center justify-center h-screen bg-[#FDC540] ">
+            <h2 class="text-8xl font-black text-center">AI Precision</h2>
             </div>
           </div>
    

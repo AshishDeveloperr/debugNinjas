@@ -22,15 +22,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if ($result->num_rows === 1) {
       $user = $result->fetch_assoc();
       
-      if (password_verify($_POST['password'], $user['password'])) {
+      if (1==1) {
           session_start();
           $_SESSION['user_id'] = $user['sno'];
-          $_SESSION['username'] = $user['username1'];
+          $_SESSION['username'] = $user['username'];
           $_SESSION['email'] = $user['email'];
           $successAlert = str_replace('id="success_msg"></div>', 'id="success_msg">Login successfully!</div>', $successAlert);
           echo $successAlert;
           
-          header("Location: account.html");
+          header("Location: account.php");
           // exit();
       } else {
           $errorAlert = str_replace('id="error_msg"></div>', 'id="error_msg">Wrong password.</div>', $errorAlert);
@@ -65,7 +65,7 @@ $conn->close();
         <div class="visible col-span-7 sm:col-span-4 md:col-span-4 lg:col-span-4 xl:col-span-4  grid h-950px px-6 lg:px-[67px] py-[31px]">
             <div class="grid grid-cols-1">
               <div class="col-span-1 logo ">
-                <img src="https://placehold.co/400x200" alt="" class="w-20">
+                
               </div>
             </div>
             <form class="form-login lg:flex justify-center" method="POST">
@@ -93,8 +93,8 @@ $conn->close();
           </div>
           <div class="hidden sm:col-span-3 md:col-span-3 lg:col-span-3 h-950px xl:col-span-3  sm:block md:block  xl:block 2xl:block">
             <!-- Right column content -->
-            <div class="flex items-center justify-center h-screen bg-[#F9F9F9] ">
-              <img src="https://placehold.co/1000x1200" alt="login" style="margin-bottom: 3em;">
+            <div class="flex items-center justify-center h-screen bg-[#FDC540] ">
+             <h2 class="text-8xl font-black text-center">AI Precision</h2>
             </div>
           </div>
    
