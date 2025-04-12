@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if (password_verify($_POST['password'], $user['password'])) {
           session_start();
           $_SESSION['user_id'] = $user['sno'];
-          $_SESSION['username'] = $user['username'];
+          $_SESSION['username'] = $user['username1'];
           $_SESSION['email'] = $user['email'];
           $successAlert = str_replace('id="success_msg"></div>', 'id="success_msg">Login successfully!</div>', $successAlert);
           echo $successAlert;

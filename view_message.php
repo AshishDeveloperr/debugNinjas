@@ -5,7 +5,7 @@ include 'src/config/db_connect.php';
 include 'src/alert/alert_success.php';
 include 'src/alert/alert_danger.php';
 
-$receiver = $_GET['rec'] ?? '';
+$user = $_GET['user'] ?? '';
 
 ?>
 <!DOCTYPE html>
@@ -29,11 +29,18 @@ $receiver = $_GET['rec'] ?? '';
                 <h2 class="text-4xl font-black text-gray-100">Hello, &nbsp;<span class="text-[#3E25F6] hover:underline">Ashish</span> !</h2>
             </div>
             <div class="max-w-3xl mx-auto">
-                
-                <div class="bg-[#FDC540] rounded-xl p-3 transition-all duration-500 ease-out cursor-pointer card flex justify-between items-center">
-                    <h2 class="text-lg font-semibold text-white tracking-wider">aasa</h2>
-                    <a href="view_message_detail.php?usr=<?php echo $username?>" class="text-base font-semibold text-white bg-[#3E25F6] px-6 py-3 rounded-md">View Message</a>
+                <?php
+                   
+                    $sql = mysqli_query($conn, "SELECT * FROM `messages` ORDER BY `id` DESC");
+
+                    while($row = mysqli_fetch_assoc($sql)){
+                ?>
+                <div class="bg-[#FDC540] rounded-xl p-3 transition-all duration-500 ease-out cursor-pointer card flex justify-between items-center my-3">
+                    <h2 class="text-lg font-semibold text-white tracking-wider"><?php echo ucfirst($row['sender'])?></h2>
+                    <a href="view_message_details.php?user=<?php echo $row['sender']?>&id=<?php echo $row['id']?>" class="text-base font-semibold text-white bg-[#3E25F6] px-6 py-3 rounded-md">View Message</a>
                 </div>
+                <?php 
+                }?>
             </div>
         </div>
    </section>
